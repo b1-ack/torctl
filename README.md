@@ -38,7 +38,6 @@ You can get in touch with the BlackArch Linux team. Just check out the following
 
 **Please, send us pull requests!**
 
-**Web:** https://www.blackarch.org/
-  https://www.os.b1ack.ru/
+**Web:** https://www.os.b1ack.ru/
 
 **Mail:** b1ack@duck.com
