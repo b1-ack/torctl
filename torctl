@@ -11,6 +11,7 @@
 #                                                                              #
 # AUTHORS                                                                      #
 # sepehrdad.dev@gmail.com                                                      #
+# b1ack@duck.com	                                                       #
 #                                                                              #
 ################################################################################
 
@@ -21,7 +22,7 @@ VERSION="torctl.sh v0.5.7"
 TOR_EXCLUDE="192.168.0.0/16 172.16.0.0/12 10.0.0.0/8"
 
 # tor uid
-TOR_UID="tor"
+TOR_UID="debian-tor"
 
 # tor socks port
 TOR_PORT="9040"
@@ -85,7 +86,7 @@ info() {
 }
 
 banner() {
-    echo -e "${REDB}--==[ torctl.sh by blackarch.org ]==--${RESET}\n"
+    echo -e "${REDB}--==[ torctl by B1ackOS ]==--${RESET}\n"
 }
 
 version() {
@@ -555,15 +556,27 @@ status() {
 }
 
 autowipe() {
-    warn "enabling torctl-autowipe"
-    systemctl enable torctl-autowipe &>"/dev/null"
-    msg "enabled torctl-autowipe"
+    if systemctl is-enabled --quiet torctl-autowipe; then
+        info "disabling torctl-autowipe"
+        systemctl disable torctl-autowipe &>"/dev/null"
+        warn "disabled torctl-autowipe"
+    else
+        info "enabling torctl-autowipe"
+        systemctl enable torctl-autowipe &>"/dev/null"
+        msg "enabled torctl-autowipe"
+    fi
 }
 
 autostart() {
-    warn "enabling torctl-autostart"
-    systemctl enable torctl-autostart &>"/dev/null"
-    msg "enabled torctl-autostart"
+    if systemctl is-enabled --quiet torctl-autostart; then
+        info "disabling torctl-autostart"
+        systemctl disable torctl-autostart &>"/dev/null"
+        warn "disabled torctl-autostart"
+    else
+        info "enabling torctl-autostart"
+        systemctl enable torctl-autostart &>"/dev/null"
+        msg "enabled torctl-autostart"
+    fi
 }
 
 usage() {
